@@ -10,7 +10,11 @@ import (
 
 type birthday struct {
 	Month int8 `json:"month"`
-	Day int8 `json:"day"`
+	Day   int8 `json:"day"`
+}
+
+type count struct {
+	Value uint8 `json:"value"`
 }
 
 type user struct {
@@ -24,6 +28,13 @@ func TestJsonTypeError(t *testing.T) {
 	err := json.Unmarshal([]byte(input), &u)
 	errmsg_testing.AssertEquals(t, errmsg.Message(err), `'id' should be string but received number`)
 	errmsg_testing.AssertType(t, errors.Unwrap(errmsg.Wrap(err)), &json.UnmarshalTypeError{})
+}
+
+func TestJsonTypeErrorForUintField(t *testing.T) {
+	var c count
+	input := `{"value": "x"}`
+	err := json.Unmarshal([]byte(input), &c)
+	errmsg_testing.AssertEquals(t, errmsg.Message(err), `'value' should be integer but received string`)
 }
 
 func TestJsonTypeErrorForNestedField(t *testing.T) {

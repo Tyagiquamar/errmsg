@@ -32,9 +32,9 @@ func (e *JSONTypeError) Unwrap() error {
 }
 
 func isIntType(typeName string) bool {
-	return typeName == "int" || typeName == "unit" ||
-		typeName == "int8" || typeName == "unit8" ||
-		typeName == "int16" || typeName == "unit16" ||
-		typeName == "int32" || typeName == "unit32" ||
-		typeName == "int64" || typeName == "unit64"
+	return typeName == "int" || typeName == "uint" ||
+		typeName == "int8" || typeName == "uint8" ||
+		typeName == "int16" || typeName == "uint16" ||
+		typeName == "int32" || typeName == "uint32" ||
+		typeName == "int64" || typeName == "uint64"
 }
